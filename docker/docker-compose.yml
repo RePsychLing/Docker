@@ -1,11 +1,5 @@
 # docker-compose -f docker-compose.yml up -d container_name
 version: '3.7'
-
-networks:
-  default:
-    external:
-      name: root_default
-
 services:
   # R
   rstudio:
