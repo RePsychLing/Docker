@@ -1,0 +1,87 @@
+# docker-compose -f docker-compose.yml up -d container_name
+version: '3.7'
+
+networks:
+  default:
+    external:
+      name: root_default
+
+services:
+  # R
+  rstudio:
+    image: rocker/geospatial
+    container_name: rstudio
+    ports:
+      - target: 8787
+        published: 8787
+        protocol: tcp
+        mode: host
+    volumes:
+      - type: bind
+        source: ./R/user-library
+        target: /usr/local/lib/R/user-library
+      - type: bind
+        source: ./R/.Rprofile
+        target: /home/rstudio/.Rprofile
+      - type: bind
+        source: ~/
+        target: /home/rstudio
+      # Include if those files exist to import your Git config
+      # Comment out lines 31-236 otherwise
+      - type: bind
+        source: ~/.gitconfig
+        target: /home/coder/.gitconfig
+      - type: bind
+        source: ~/.gitignore_global
+        target: /home/coder/.gitignore_global
+    environment:
+        DISABLE_AUTH: 'true'
+        TZ: :Europe/Berlin
+  # vscode
+  vscode:
+    image: vscode
+    container_name: vscode
+    ports:
+      - target: 8080
+        published: 8080
+        protocol: tcp
+        mode: host
+    volumes:
+      - type: bind
+        source: ~/
+        target: /home/coder/project
+      - type: bind
+        source: ./julia/.julia
+        target: /home/coder/.julia
+      # Include if those files exist to import your Git config
+      # Comment out lines 57-62 otherwise
+      - type: bind
+        source: ~/.gitconfig
+        target: /home/coder/.gitconfig
+      - type: bind
+        source: ~/.gitignore_global
+        target: /home/coder/.gitignore_global
+    environment:
+      TZ: :Europe/Berlin
+    command: --auth=none
+  # JupyterLab
+  jupyter:
+    image: jupyter/datascience-notebook
+    container_name: jupyter
+    ports:
+      - target: 8888
+        published: 8888
+        protocol: tcp
+        mode: host
+    volumes:
+      - type: bind
+        source: ~/
+        target: /home/jovyan/work
+      - type: bind
+        source: ./jupyter/jupyter_notebook_config.py
+        target: /home/jovyan/.jupyter/jupyter_notebook_config.py
+      - type: bind
+        source: ./julia/.julia
+        target: /home/jovyan/.julia
+    environment:
+      TZ: :Europe/Berlin
