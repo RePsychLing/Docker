@@ -24,13 +24,13 @@ services:
         source: ./julia/.julia
         target: /home/coder/.julia
       # Include if those files exist to import your Git config
-      # Comment out lines 31-236 otherwise
-      - type: bind
-        source: ~/.gitconfig
-        target: /home/coder/.gitconfig
-      - type: bind
-        source: ~/.gitignore_global
-        target: /home/coder/.gitignore_global
+      # Comment out lines 27-33 otherwise
+      # - type: bind
+      #   source: ~/.gitconfig
+      #   target: /home/coder/.gitconfig
+      # - type: bind
+      #   source: ~/.gitignore_global
+      #   target: /home/coder/.gitignore_global
     environment:
         DISABLE_AUTH: 'true'
         TZ: :Europe/Berlin
@@ -57,13 +57,13 @@ services:
         source: ./R/user-library
         target: /usr/local/lib/R/user-library
       # Include if those files exist to import your Git config
-      # Comment out lines 57-62 otherwise
-      - type: bind
-        source: ~/.gitconfig
-        target: /home/coder/.gitconfig
-      - type: bind
-        source: ~/.gitignore_global
-        target: /home/coder/.gitignore_global
+      # Comment out lines 61-66 otherwise
+      # - type: bind
+      #   source: ~/.gitconfig
+      #   target: /home/coder/.gitconfig
+      # - type: bind
+      #   source: ~/.gitignore_global
+      #   target: /home/coder/.gitignore_global
     environment:
       TZ: :Europe/Berlin
     command: --auth=none
