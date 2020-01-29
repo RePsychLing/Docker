@@ -1,2 +1,3 @@
 julia/.julia
 R/user-library
+!R/.Rprofile

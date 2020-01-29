@@ -3,7 +3,7 @@ version: '3.7'
 services:
   # R
   rstudio:
-    image: rocker/geospatial
+    image: nosferican/rstudio_jupyter
     container_name: rstudio
     ports:
       - target: 8787
@@ -12,14 +12,17 @@ services:
         mode: host
     volumes:
       - type: bind
-        source: ./R/user-library
-        target: /usr/local/lib/R/user-library
-      - type: bind
         source: ./R/.Rprofile
         target: /home/rstudio/.Rprofile
       - type: bind
+        source: ./R/user-library
+        target: /usr/local/lib/R/user-library
+      - type: bind
         source: ~/
         target: /home/rstudio
+      - type: bind
+        source: ./julia/.julia
+        target: /home/coder/.julia
       # Include if those files exist to import your Git config
       # Comment out lines 31-236 otherwise
       - type: bind
@@ -33,7 +36,7 @@ services:
         TZ: :Europe/Berlin
   # vscode
   vscode:
-    image: vscode
+    image: nosferican/vscode_jupyter
     container_name: vscode
     ports:
       - target: 8080
@@ -47,6 +50,12 @@ services:
       - type: bind
         source: ./julia/.julia
         target: /home/coder/.julia
+      - type: bind
+        source: ./R/.Rprofile
+        target: /home/coder/.Rprofile
+      - type: bind
+        source: ./R/user-library
+        target: /usr/local/lib/R/user-library
       # Include if those files exist to import your Git config
       # Comment out lines 57-62 otherwise
       - type: bind
@@ -77,5 +86,11 @@ services:
       - type: bind
         source: ./julia/.julia
         target: /home/jovyan/.julia
+      - type: bind
+        source: ./R/.Rprofile
+        target: /home/jovyan/.Rprofile
+      - type: bind
+        source: ./R/user-library
+        target: /usr/local/lib/R/user-library
     environment:
       TZ: :Europe/Berlin
