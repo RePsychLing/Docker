@@ -19,7 +19,7 @@ To start the RStudio, Jupyter Lab, and VS Code all together omit the container_n
 
 RStudio will be accessible at http://localhost:8787/
 
-This container includes R v3.6.1 and many R packages.
+This container includes R v3.6.1 and many R packages as well as Python v3.7.6 and Julia v1.3.1.
 
 ### Jupyter Lab
 
@@ -27,7 +27,7 @@ Jupyter Lab will be accessible at http://localhost:8888/lab
 
 When prompted for a password, the password is: *jupyter*.
 
-The available kernels include R v3.6.1, Python v3.7.6, and Julia v1.3.1.
+The available kernels include R v3.6.1 (conda version), Python v3.7.6, and Julia v1.3.1.
 
 For Julia, run the following lines before installing packages to use the user library.
 ```
@@ -39,7 +39,7 @@ push!(DEPOT_PATH, joinpath(homedir(), ".julia"))
 
 Visual Studio Code with Julia is accesible at http://localhost:8080/
 
-This container includes Julia v1.3.1.
+This container includes Julia v1.3.1, Python v3.7.6, and R v3.6.1.
 
 ## Volumes
 
