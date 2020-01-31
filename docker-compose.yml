@@ -18,7 +18,7 @@ services:
         source: ./R/user-library
         target: /usr/local/lib/R/user-library
       - type: bind
-        source: ~/
+        source: $HOME/
         target: /home/rstudio
       - type: bind
         source: ./julia/.julia
@@ -26,17 +26,17 @@ services:
       # Include if those files exist to import your Git config
       # Comment out lines 27-33 otherwise
       # - type: bind
-      #   source: ~/.gitconfig
+      #   source: $HOME/.gitconfig
       #   target: /home/coder/.gitconfig
       # - type: bind
-      #   source: ~/.gitignore_global
+      #   source: $HOME/.gitignore_global
       #   target: /home/coder/.gitignore_global
     environment:
         DISABLE_AUTH: 'true'
         TZ: :Europe/Berlin
   # vscode
   vscode:
-    image: nosferican/vscode_jupyter
+    image: vscode # nosferican/vscode_jupyter
     container_name: vscode
     ports:
       - target: 8080
@@ -45,7 +45,7 @@ services:
         mode: host
     volumes:
       - type: bind
-        source: ~/
+        source: $HOME/
         target: /home/coder/project
       - type: bind
         source: ./julia/.julia
@@ -59,10 +59,10 @@ services:
       # Include if those files exist to import your Git config
       # Comment out lines 61-66 otherwise
       # - type: bind
-      #   source: ~/.gitconfig
+      #   source: $HOME/.gitconfig
       #   target: /home/coder/.gitconfig
       # - type: bind
-      #   source: ~/.gitignore_global
+      #   source: $HOME/.gitignore_global
       #   target: /home/coder/.gitignore_global
     environment:
       TZ: :Europe/Berlin
@@ -78,7 +78,7 @@ services:
         mode: host
     volumes:
       - type: bind
-        source: ~/
+        source: $HOME/
         target: /home/jovyan/work
       - type: bind
         source: ./jupyter/jupyter_notebook_config.py
