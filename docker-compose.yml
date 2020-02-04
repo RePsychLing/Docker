@@ -36,7 +36,7 @@ services:
         TZ: :Europe/Berlin
   # vscode
   vscode:
-    image: vscode # nosferican/vscode_jupyter
+    image: nosferican/vscode_jupyter
     container_name: vscode
     ports:
       - target: 8080
